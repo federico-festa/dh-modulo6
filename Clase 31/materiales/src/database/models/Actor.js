@@ -1,25 +1,28 @@
 module.exports = (sequelize, dataTypes) => {
-    const alias = 'Genre';
+    const alias = 'Actor';
     const cols = {
         id: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
+        first_name: {
             type: dataTypes.STRING
         },
-        ranking: {
-            type: dataTypes.INTEGER
+        last_name: {
+            type: dataTypes.STRING
         },
-        active: {
+        rating: {
+            type: dataTypes.DECIMAL
+        },
+        favorite_movie_id: {
             type: dataTypes.INTEGER
         },
     };
     const config = {
-        tableName: 'genres',
+        tableName: 'actors',
         timestamps: false
     };
-    const Genre = sequelize.define(alias, cols, config);
-    return Genre;
+    const Actor = sequelize.define(alias, cols, config);
+    return Actor;
 };

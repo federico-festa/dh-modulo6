@@ -23,7 +23,19 @@ const moviesController = {
             });
     },
     recomended: (req,res) => {
-        db.Movie.findAll({})
+        db.Movie.findAll({
+            where: { 
+                rating: {[db.Sequelize.Op.gt]: 7.1}
+            },
+            order: [['release_date', 'DESC']],
+            limit: 5
+        })
+            .then((movies) => {
+                res.render('recommendedMovies', {movies: movies});
+            })
+    },
+    add: (req,res) => {
+        res.render('')
     }
 };
 
