@@ -1,6 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
-    const alias = 'Movie';
-    const cols = {
+    const Movie = sequelize.define('Movie', 
+    {
         id: {
             type: dataTypes.INTEGER,
             primaryKey: true,
@@ -22,13 +22,12 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER
         },
         genre_id: {
-            type: dataTypes.STRING
+            type: dataTypes.INTEGER
         },  
-    };
-    const config = {
+    }, 
+    {
         tableName: 'movies',
         timestamps: false
-    };
-    const Movie = sequelize.define(alias, cols, config);
+    });
     return Movie;
 };

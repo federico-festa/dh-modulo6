@@ -1,6 +1,5 @@
 const db = require('../database/models');
 
-
 const moviesController = {
     index: (req, res) => {
         db.Movie.findAll()
@@ -35,7 +34,40 @@ const moviesController = {
             })
     },
     add: (req,res) => {
-        res.render('')
+        res.render('moviesAdd');
+    },
+    create: (req,res) => {
+        db.Movie.create({
+            title : req.body.title,
+            rating : req.body.rating,
+            awards : req.body.awards,
+            release_date : req.body.release_date,
+            length : req.body.length
+        })
+        .then((movies)=>{
+            res.redirect('/movies');
+        });
+    },
+    edit: (req,res) => {
+        db.Movie.findByPk(req.params.id)
+            .then((movie) => {
+                res.render('moviesEdit', {movie: movie});
+            });
+    },
+    update: (req,res) => {
+        db.Movie.update({
+            title: req.body.title,
+            rating: req.body.rating,
+            awards: req.body.awards,
+            release_date: req.body.release_date,
+            length: req.body.length,
+        },
+        {
+            where: {id: req.params.id}
+        })
+        .then((movie) => {
+            res.redirect('/movies');
+        });
     }
 };
 
